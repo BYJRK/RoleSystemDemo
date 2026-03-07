@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task: run
+    desc: Run the application in Debug mode
+
+  run:
+    cmds:
+      - dotnet run --project ./RoleSystemDemo/RoleSystemDemo.csproj
+    desc: Run the application in Debug mode
+    silent: true
+
+  build:
+    cmds:
+      - dotnet build
+    desc: Build the application
+    silent: true
+
+  clean:
+    cmds:
+      - dotnet clean
+    desc: Clean the build artifacts
+    silent: true
+
+  publish:
+    cmds:
+      - >
+        pwsh.exe -NoProfile -NoLogo -Command
+        "if (Test-Path -Path './publish') {
+          Remove-Item -Path './publish' -Recurse -Force
+        }"
+      - >
+        dotnet publish ./RoleSystemDemo/RoleSystemDemo.csproj
+        -c Release -o ./publish
+        -p:SelfContained=false
+        -p:PublishSingleFile=true
+    desc: Publish the application for deployment
+    silent: true
