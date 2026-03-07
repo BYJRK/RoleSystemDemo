@@ -101,7 +101,7 @@
                                Text="{Binding CurrentUsername}"
                                FontWeight="Medium" />
 
-                    <Button Content="退出" Command="{Binding LogoutCommand}" />
+                    <Button Content="{Binding LogoutButtonText}" Command="{Binding LogoutCommand}" Padding="12,4"/>
                 </StackPanel>
             </Grid>
         </Border>

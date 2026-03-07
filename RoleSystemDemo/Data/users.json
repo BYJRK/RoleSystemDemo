@@ -16,11 +16,5 @@
     "Username": "bob",
     "PasswordHash": "8d059c3640b97180dd2ee453e20d34ab0cb0f2eccbe87d01915a8e578a202b11",
     "Role": "User"
-  },
-  {
-    "Id": "E2E03919-AE2B-48F1-B876-AB0BAD049062",
-    "Username": "guest",
-    "PasswordHash": "6b93ccba414ac1d0ae1e77f3fac560c748a6701ed6946735a49d463351518e16",
-    "Role": "Guest"
   }
 ]

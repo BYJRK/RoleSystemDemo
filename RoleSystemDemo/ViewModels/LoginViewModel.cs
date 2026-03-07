@@ -34,6 +34,13 @@ public partial class LoginViewModel : ObservableObject
     private bool CanLogin() =>
         !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
 
+    /// <summary>
+    /// 以访客身份进入。不进行任何身份验证，直接开启只读浏览模式。
+    /// AuthService.CurrentUser 保持 null，CurrentRole 自动为 Guest。
+    /// </summary>
+    [RelayCommand]
+    private void EnterAsGuest() => _onLoginSuccess();
+
     [RelayCommand(CanExecute = nameof(CanLogin))]
     private void Login()
     {

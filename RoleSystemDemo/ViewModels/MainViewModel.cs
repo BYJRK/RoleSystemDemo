@@ -54,11 +54,15 @@ public partial class MainViewModel : ObservableRecipient, IRecipient<AuthChanged
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(RoleBadge))]
+    [NotifyPropertyChangedFor(nameof(LogoutButtonText))]
     [NotifyCanExecuteChangedFor(nameof(NavigateToAdminCommand))]
     public partial UserRole CurrentRole { get; private set; }
 
     [ObservableProperty]
-    public partial string CurrentUsername { get; private set; } = string.Empty;
+    public partial string CurrentUsername { get; private set; } = "访客";
+
+    /// <summary>登出/返回登录按钮的文字：已登录时显示"登出"，访客模式显示"返回登录"。</summary>
+    public string LogoutButtonText => CurrentRole == UserRole.Guest ? "返回登录" : "登出";
 
     public bool IsAdmin => CurrentRole == UserRole.Admin;
 
@@ -95,7 +99,7 @@ public partial class MainViewModel : ObservableRecipient, IRecipient<AuthChanged
 
     private void RefreshAuthState(UserModel? user)
     {
-        CurrentUsername = user?.Username ?? string.Empty;
+        CurrentUsername = user?.Username ?? "访客";
         CurrentRole = user?.Role ?? UserRole.Guest;
     }
 }

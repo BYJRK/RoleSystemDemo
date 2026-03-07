@@ -28,7 +28,7 @@
                 <TextBlock Margin="0,0,0,6" Text="用户名" FontWeight="Medium" />
                 <TextBox Margin="0,0,0,14"
                          InputMethod.IsInputMethodEnabled="False"
-                         ToolTip="测试账号：admin / alice / bob / guest（密码同用户名+&quot;123&quot;）"
+                         ToolTip="测试账号：admin（admin123）/ alice（alice123）/ bob（bob123）"
                          Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
 
                 <!-- 密码 -->
@@ -59,6 +59,24 @@
                         IsDefault="True"
                         Command="{Binding LoginCommand}"
                         Style="{StaticResource AccentButtonStyle}" />
+
+                <!-- 分隔线 -->
+                <Grid Margin="0,16,0,12">
+                    <Separator />
+                    <TextBlock Text="或"
+                               HorizontalAlignment="Center"
+                               Padding="8,0"
+                               Background="{DynamicResource ApplicationPageBackgroundThemeBrush}"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               FontSize="12" />
+                </Grid>
+
+                <!-- 访客模式按钮 -->
+                <Button Padding="0,8"
+                        HorizontalAlignment="Stretch"
+                        Content="👁 以访客身份浏览（只读）"
+                        Command="{Binding EnterAsGuestCommand}"
+                        ToolTip="访客可浏览全部博客，但无法发布或编辑内容" />
             </StackPanel>
         </Border>
     </Grid>
