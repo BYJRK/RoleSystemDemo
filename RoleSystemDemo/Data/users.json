@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id": "19D5AC04-3C71-446F-9B73-2A5BB6B593A1",
+    "Username": "admin",
+    "PasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "Role": "Admin"
+  },
+  {
+    "Id": "079560E4-337B-4217-AFCD-E79569062D26",
+    "Username": "alice",
+    "PasswordHash": "4e40e8ffe0ee32fa53e139147ed559229a5930f89c2204706fc174beb36210b3",
+    "Role": "User"
+  },
+  {
+    "Id": "9AD4A4B7-93C1-4C34-B2C5-D30D0154CFD5",
+    "Username": "bob",
+    "PasswordHash": "8d059c3640b97180dd2ee453e20d34ab0cb0f2eccbe87d01915a8e578a202b11",
+    "Role": "User"
+  },
+  {
+    "Id": "E2E03919-AE2B-48F1-B876-AB0BAD049062",
+    "Username": "guest",
+    "PasswordHash": "6b93ccba414ac1d0ae1e77f3fac560c748a6701ed6946735a49d463351518e16",
+    "Role": "Guest"
+  }
+]

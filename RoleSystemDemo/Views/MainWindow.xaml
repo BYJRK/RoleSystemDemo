@@ -1,0 +1,111 @@
+﻿<Window x:Class="RoleSystemDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:RoleSystemDemo.ViewModels"
+        xmlns:services="clr-namespace:RoleSystemDemo.Services"
+        xmlns:models="clr-namespace:RoleSystemDemo.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:views="clr-namespace:RoleSystemDemo.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="角色权限博客系统"
+        Width="960"
+        Height="640"
+        MinWidth="760"
+        MinHeight="480"
+        d:DataContext="{d:DesignInstance vm:MainViewModel}"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type vm:BlogListViewModel}">
+            <views:BlogListView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:BlogDetailViewModel}">
+            <views:BlogDetailView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:BlogEditorViewModel}">
+            <views:BlogEditorView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:AdminViewModel}">
+            <views:AdminView />
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Padding="16,0"
+                Background="{DynamicResource NavigationViewContentBackground}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="0,0,0,1">
+            <Grid Height="52">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,12,0"
+                               VerticalAlignment="Center"
+                               Text="📝 角色博客"
+                               FontWeight="SemiBold"
+                               FontSize="15" />
+
+                    <Button Margin="0,0,4,0"
+                            Content="博客列表"
+                            Command="{Binding NavigateToBlogListCommand}"
+                            Style="{StaticResource HyperlinkButtonStyle}" />
+
+                    <Button Content="管理员面板"
+                            Command="{Binding NavigateToAdminCommand}"
+                            Style="{StaticResource HyperlinkButtonStyle}"
+                            Visibility="{Binding CurrentRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=Admin}"
+                            ToolTip="管理用户和帖子（仅 Admin 可见）" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal">
+
+                    <Border Margin="0,0,6,0" Padding="10,4" CornerRadius="4">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="{DynamicResource SystemFillColorNeutralBackgroundBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRole}" Value="{x:Static models:UserRole.Admin}">
+                                        <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CurrentRole}" Value="{x:Static models:UserRole.User}">
+                                        <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBackgroundBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding CurrentRole}" Value="{x:Static models:UserRole.Guest}">
+                                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding RoleBadge}"
+                                   FontSize="12"
+                                   FontWeight="Medium" />
+                    </Border>
+
+                    <TextBlock Margin="0,0,10,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding CurrentUsername}"
+                               FontWeight="Medium" />
+
+                    <Button Content="退出" Command="{Binding LogoutCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+    </Grid>
+</Window>
