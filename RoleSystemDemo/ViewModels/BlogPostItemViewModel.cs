@@ -6,7 +6,7 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// 博客列表中单条帖子的行 ViewModel。
+/// 博客列表中单条帖子的行 ViewModel
 /// 封装权限相关的三种 UI 表达模式：
 /// <list type="bullet">
 ///   <item><see cref="CanDelete"/> — 隐藏型：无权限时完全不显示删除按钮</item>
@@ -35,7 +35,7 @@ public partial class BlogPostItemViewModel : ObservableObject
         RefreshPermissions();
     }
 
-    // ── 显示属性 ───────────────────────────────────────────────────────────
+    #region 显示属性
 
     public string Title => Post.Title;
     public string AuthorName => Post.AuthorName;
@@ -44,35 +44,39 @@ public partial class BlogPostItemViewModel : ObservableObject
         ? Post.Content[..80] + "…"
         : Post.Content;
 
-    // ── 权限属性（教学重点）────────────────────────────────────────────────
+    #endregion
+
+    #region 权限属性
 
     /// <summary>
-    /// 【模式一：禁用型】编辑按钮始终可见，但仅在有权限时可用。
-    /// 权限规则：管理员可编辑任何帖子；普通用户只能编辑自己的帖子。
+    /// 编辑按钮始终可见，但仅在有权限时可用
+    /// 权限规则：管理员可编辑任何帖子；普通用户只能编辑自己的帖子
     /// </summary>
     [ObservableProperty]
     public partial bool CanEdit { get; private set; }
 
     /// <summary>
-    /// 【模式一配套 Tooltip】权限不足时给出具体原因说明。
+    /// 权限不足时给出具体原因说明
     /// </summary>
     [ObservableProperty]
     public partial string EditTooltip { get; private set; } = string.Empty;
 
     /// <summary>
-    /// 【模式一：禁用型】删除按钮始终可见，但仅在有权限时可用。
-    /// 权限规则：管理员可删除任何帖子；普通用户只能删除自己的帖子。
+    /// 删除按钮始终可见，但仅在有权限时可用
+    /// 权限规则：管理员可删除任何帖子；普通用户只能删除自己的帖子
     /// </summary>
     [ObservableProperty]
     public partial bool CanDelete { get; private set; }
 
     /// <summary>
-    /// 【模式一配套 Tooltip】权限不足时给出具体原因说明。
+    /// 权限不足时给出具体原因说明
     /// </summary>
     [ObservableProperty]
     public partial string DeleteTooltip { get; private set; } = string.Empty;
 
-    // ── 命令 ───────────────────────────────────────────────────────────────
+    #endregion
+
+    #region 命令
 
     [RelayCommand]
     private void View() => _onView(Post);
@@ -83,7 +87,9 @@ public partial class BlogPostItemViewModel : ObservableObject
     [RelayCommand]
     private void Delete() => _onDelete(Post);
 
-    // ── 权限刷新（收到 AuthChangedMessage 后由父 ViewModel 调用）────────────
+    #endregion
+
+    #region 权限刷新
 
     public void RefreshPermissions()
     {
@@ -119,4 +125,6 @@ public partial class BlogPostItemViewModel : ObservableObject
             _              => "请登录 User 账号后删除帖子"
         };
     }
+
+    #endregion
 }

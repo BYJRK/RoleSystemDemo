@@ -1,7 +1,7 @@
 namespace RoleSystemDemo.Models;
 
 /// <summary>
-/// 博客文章模型，对应 posts.json 中的一条记录。
+/// 博客文章模型，对应 posts.json 中的一条记录
 /// </summary>
 public class BlogPost
 {

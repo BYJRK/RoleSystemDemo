@@ -6,8 +6,8 @@ using RoleSystemDemo.Models;
 namespace RoleSystemDemo.Services;
 
 /// <summary>
-/// 数据持久化服务，使用 JSON 文件作为存储后端。
-/// 文件位于程序运行目录下的 Data/ 子目录中。
+/// 数据持久化服务，使用 JSON 文件作为存储后端
+/// 文件位于程序运行目录下的 Data/ 子目录中
 /// </summary>
 public static class DataService
 {
@@ -25,7 +25,7 @@ public static class DataService
         Converters = { new JsonStringEnumConverter() },
     };
 
-    // ── Users ──────────────────────────────────────────────────────────────
+    #region Users
 
     public static List<UserModel> LoadUsers()
     {
@@ -42,7 +42,9 @@ public static class DataService
         File.WriteAllText(UsersFile, json);
     }
 
-    // ── Posts ──────────────────────────────────────────────────────────────
+    #endregion
+
+    #region Posts
 
     public static List<BlogPost> LoadPosts()
     {
@@ -58,4 +60,6 @@ public static class DataService
         var json = JsonSerializer.Serialize(posts, JsonOptions);
         File.WriteAllText(PostsFile, json);
     }
+
+    #endregion
 }

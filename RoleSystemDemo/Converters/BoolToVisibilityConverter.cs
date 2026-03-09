@@ -5,8 +5,8 @@ using System.Windows.Data;
 namespace RoleSystemDemo.Converters;
 
 /// <summary>
-/// 将 bool 转换为 Visibility。true → Visible，false → Collapsed。
-/// 设置 Invert=true 可反转（用于"无权限时显示"的提示区域）。
+/// 将 bool 转换为 Visibility。true → Visible，false → Collapsed
+/// 设置 Invert=true 可反转（用于"无权限时显示"的提示区域）
 /// </summary>
 [ValueConversion(typeof(bool), typeof(Visibility))]
 public sealed class BoolToVisibilityConverter : IValueConverter

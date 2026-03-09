@@ -6,9 +6,9 @@ namespace RoleSystemDemo.Converters;
 
 /// <summary>
 /// 【权限模式三：动态内容型】
-/// 将当前用户角色转换为字符串提示文字。
-/// 权限足够时返回 null（绑定目标可用 Visibility 的 FallbackValue 处理）；
-/// 权限不足时返回提示字符串，显示在 TextBlock 等控件中。
+/// 将当前用户角色转换为字符串提示文字
+/// 权限足妠时返回 null（绑定目标可用 Visibility 的 FallbackValue 处理）；
+/// 权限不足时返回提示字符串，显示在 TextBlock 等控件中
 ///
 /// ConverterParameter 格式：
 ///   "AllowedRoles|足够时文字|不足时文字"
@@ -26,7 +26,7 @@ public sealed class RoleToContentConverter : IValueConverter
 {
     /// <summary>
     /// ConverterParameter 格式：<c>允许角色（|分隔）§有权限时的内容§无权限时的内容</c>，
-    /// 三段之间用 § 分隔（避免与角色名的 | 冲突）。
+    /// 三段之间用 § 分隔（避免与角色名的 | 冲突）
     /// </summary>
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

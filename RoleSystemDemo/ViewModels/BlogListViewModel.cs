@@ -9,8 +9,8 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// 博客列表页 ViewModel。
-/// 演示三种 UI 权限模式在列表场景中的实际应用。
+/// 博客列表页 ViewModel
+/// 演示三种 UI 权限模式在列表场景中的实际应用
 /// </summary>
 public partial class BlogListViewModel : ObservableRecipient, IRecipient<AuthChangedMessage>
 {
@@ -28,7 +28,7 @@ public partial class BlogListViewModel : ObservableRecipient, IRecipient<AuthCha
         RefreshHeaderState();
     }
 
-    // ── 帖子列表 ───────────────────────────────────────────────────────────
+    #region 帖子列表
 
     public ObservableCollection<BlogPostItemViewModel> Posts { get; } = [];
 
@@ -54,31 +54,32 @@ public partial class BlogListViewModel : ObservableRecipient, IRecipient<AuthCha
         LoadPosts();
     }
 
-    // ── 新建帖子区域（演示三种模式混合）────────────────────────────────────
+    #endregion
+
+    #region 新建帖子区域
 
     /// <summary>
-    /// 【模式二：隐藏型】"新建帖子"按钮本体：仅 User 和 Admin 可见。
+    /// “新建帖子”按钮本体：仅 User 和 Admin 可见
     /// </summary>
     [ObservableProperty]
     public partial bool CanCreatePost { get; private set; }
 
     /// <summary>
-    /// 【模式一：禁用型】按钮是否启用（始终显示，权限不足时置灰）。
-    /// 注：CanCreatePost 控制真正的可见/隐藏区域，此处用于另一个"受限可见"按钮演示。
+    /// 按钮是否启用（始终显示，权限不足时置灰）
     /// </summary>
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(NewPostCommand))]
     public partial bool NewPostEnabled { get; private set; }
 
     /// <summary>
-    /// 【模式三：动态内容】写在"新建帖子"区域旁的提示文字。
-    /// 权限不足时提示如何升级权限，有权限时为 null（不显示）。
+    /// 写在“新建帖子”区域旁的提示文字
+    /// 权限不足时提示如何升级权限，有权限时为 null
     /// </summary>
     [ObservableProperty]
     public partial string? NewPostHint { get; private set; }
 
     /// <summary>
-    /// 【模式一 Tooltip】"新建帖子"禁用按钮的悬停提示。
+    /// “新建帖子”禁用按钮的悬停提示
     /// </summary>
     [ObservableProperty]
     public partial string NewPostButtonTooltip { get; private set; } = string.Empty;
@@ -86,7 +87,9 @@ public partial class BlogListViewModel : ObservableRecipient, IRecipient<AuthCha
     [RelayCommand(CanExecute = nameof(NewPostEnabled))]
     private void NewPost() => _navigateToEditor(null);
 
-    // ── 消息接收 ───────────────────────────────────────────────────────────
+    #endregion
+
+    #region 消息接收
 
     public void Receive(AuthChangedMessage message)
     {
@@ -115,4 +118,6 @@ public partial class BlogListViewModel : ObservableRecipient, IRecipient<AuthCha
             _              => "发布一篇新博客"
         };
     }
+
+    #endregion
 }

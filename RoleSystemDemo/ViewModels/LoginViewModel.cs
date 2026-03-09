@@ -5,8 +5,8 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// 登录窗口 ViewModel。
-/// 登录成功后通过回调 <see cref="OnLoginSuccess"/> 通知外部（App）切换主窗口。
+/// 登录窗口 ViewModel
+/// 登录成功后通过回调 <see cref="OnLoginSuccess"/> 通知外部（App）切换主窗口
 /// </summary>
 public partial class LoginViewModel : ObservableObject
 {
@@ -35,8 +35,8 @@ public partial class LoginViewModel : ObservableObject
         !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
 
     /// <summary>
-    /// 以访客身份进入。不进行任何身份验证，直接开启只读浏览模式。
-    /// AuthService.CurrentUser 保持 null，CurrentRole 自动为 Guest。
+    /// 以访客身份进入。不进行任何身份验证，直接开启只读浏覧模式
+    /// AuthService.CurrentUser 保持 null，CurrentRole 自动为 Guest
     /// </summary>
     [RelayCommand]
     private void EnterAsGuest() => _onLoginSuccess();

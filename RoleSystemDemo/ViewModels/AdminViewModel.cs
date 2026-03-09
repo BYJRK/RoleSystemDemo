@@ -7,8 +7,8 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// Admin 面板 ViewModel。
-/// 包含用户管理（修改角色、删除用户）和帖子管理（删除任意帖子）两个 Tab。
+/// Admin 面板 ViewModel
+/// 包含用户管理（修改角色、削除用户）和帖子管理（削除任意帖子）两个 Tab
 /// </summary>
 public partial class AdminViewModel : ObservableObject
 {
@@ -17,11 +17,13 @@ public partial class AdminViewModel : ObservableObject
         LoadData();
     }
 
-    // ── 用户管理 ───────────────────────────────────────────────────────────
+    #region 用户管理
 
     public ObservableCollection<UserAdminItemViewModel> Users { get; } = [];
 
-    // ── 帖子管理 ───────────────────────────────────────────────────────────
+    #endregion
+
+    #region 帖子管理
 
     public ObservableCollection<PostAdminItemViewModel> AllPosts { get; } = [];
 
@@ -74,9 +76,11 @@ public partial class AdminViewModel : ObservableObject
         DataService.SavePosts(all);
         LoadPosts();
     }
+
+    #endregion
 }
 
-// ── 嵌套行 ViewModel ──────────────────────────────────────────────────────────
+#region 嵌套行 ViewModel
 
 /// <summary>用户管理列表的单行 ViewModel。</summary>
 public partial class UserAdminItemViewModel : ObservableObject
@@ -137,3 +141,5 @@ public partial class PostAdminItemViewModel : ObservableObject
     [RelayCommand]
     private void Delete() => _onDelete(Post);
 }
+
+#endregion

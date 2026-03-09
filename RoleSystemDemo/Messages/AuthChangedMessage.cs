@@ -9,7 +9,7 @@ namespace RoleSystemDemo.Messages;
 ///   <item>用户登出</item>
 ///   <item>Admin 修改某用户的角色</item>
 /// </list>
-/// 各 ViewModel 订阅此消息以响应权限变化，无需直接耦合 AuthService。
+/// 各 ViewModel 订卫此消息以响应权限变化，无需直接耦合 AuthService
 /// </summary>
 /// <param name="CurrentUser">登录后的用户；为 null 表示已登出。</param>
 public sealed record AuthChangedMessage(UserModel? CurrentUser);

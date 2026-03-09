@@ -6,8 +6,8 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// 帖子详情页 ViewModel。
-/// 演示【模式三：动态内容】：底部互动区域根据当前角色显示不同内容。
+/// 帖子详情页 ViewModel
+/// 底部互动区域根据当前角色显示不同内容
 /// </summary>
 public partial class BlogDetailViewModel : ObservableObject
 {
@@ -22,7 +22,7 @@ public partial class BlogDetailViewModel : ObservableObject
 
     public BlogPost Post { get; }
 
-    // ── 基础展示 ───────────────────────────────────────────────────────────
+    #region 基础展示
 
     public string Title => Post.Title;
     public string Content => Post.Content;
@@ -32,22 +32,24 @@ public partial class BlogDetailViewModel : ObservableObject
         ? $"（更新于 {Post.UpdatedAt:yyyy-MM-dd HH:mm}）"
         : string.Empty;
 
-    // ── 互动区域（演示动态内容）────────────────────────────────────────────
+    #endregion
+
+    #region 互动区域
 
     /// <summary>
-    /// 【模式三：动态内容】底部互动区域的标题，随角色不同而变化。
+    /// 底部互动区域的标题，随角色不同而变化
     /// </summary>
     [ObservableProperty]
     public partial string InteractionTitle { get; private set; } = string.Empty;
 
     /// <summary>
-    /// 【模式三：动态内容】互动区域的说明文字，随角色不同而变化。
+    /// 互动区域的说明文字，随角色不同而变化
     /// </summary>
     [ObservableProperty]
     public partial string InteractionHint { get; private set; } = string.Empty;
 
     /// <summary>
-    /// 互动区域的背景标记，用于 XAML 中根据角色绑定不同的视觉样式。
+    /// 互动区域的背景标记，用于 XAML 中根据角色绑定不同的视觉样式
     /// </summary>
     [ObservableProperty]
     public partial UserRole InteractionRole { get; private set; }
@@ -74,8 +76,12 @@ public partial class BlogDetailViewModel : ObservableObject
         };
     }
 
-    // ── 命令 ───────────────────────────────────────────────────────────────
+    #endregion
+
+    #region 命令
 
     [RelayCommand]
     private void Back() => _navigateBack();
+
+    #endregion
 }

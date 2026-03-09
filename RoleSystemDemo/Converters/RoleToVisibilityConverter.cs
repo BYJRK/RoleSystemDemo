@@ -8,8 +8,8 @@ namespace RoleSystemDemo.Converters;
 
 /// <summary>
 /// 【权限模式一：隐藏型】
-/// 将当前用户角色转换为 <see cref="Visibility"/>。
-/// 权限不足时返回 <see cref="Visibility.Collapsed"/>（控件完全不显示）。
+/// 将当前用户角色转换为 <see cref="Visibility"/>
+/// 权限不足时返回 <see cref="Visibility.Collapsed"/>（控件完全不显示）
 ///
 /// 用法示例（只有 Admin 能看到此控件）：
 /// <code>

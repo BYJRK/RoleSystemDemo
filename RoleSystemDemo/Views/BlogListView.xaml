@@ -20,9 +20,7 @@
                    Style="{StaticResource TitleTextBlockStyle}"
                    Margin="0,0,0,16"/>
 
-        <!-- ═══════════════════════════════════════════════════════════
-             新建帖子区域 — 同时演示三种权限 UI 模式
-             ═══════════════════════════════════════════════════════════ -->
+        <!-- 新建帖子区域 -->
         <Border Grid.Row="1"
                 Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                 CornerRadius="8"
@@ -35,7 +33,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- 【模式三：动态内容】提示文字 — Guest 时显示，有权限时隐藏 -->
+                <!-- 提示文字 — Guest 时显示，有权限时隐藏 -->
                 <TextBlock Grid.Column="0"
                            Text="{Binding NewPostHint}"
                            Foreground="{DynamicResource SystemFillColorCautionBrush}"
@@ -59,7 +57,7 @@
                     <Run Text="共 "/><Run Text="{Binding Posts.Count, Mode=OneWay}"/><Run Text=" 篇博客"/>
                 </TextBlock>
 
-                <!-- 【模式二：禁用型】写博客按钮 — Guest 可见但置灰，悬停显示说明 -->
+                <!-- 写博客按钮 — Guest 可见但置灰，悬停显示说明 -->
                 <Button Grid.Column="2"
                         Content="✏️ 写博客"
                         Command="{Binding NewPostCommand}"
@@ -106,7 +104,7 @@
 
                                     <!-- 操作按钮组 -->
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                        <!-- 【模式二：禁用型】编辑按钮 — 始终可见，权限不足时置灰 -->
+                                        <!-- 编辑按钮 — 始终可见，权限不足时置灰 -->
                                         <Button Content="编辑"
                                                 Command="{Binding EditCommand}"
                                                 IsEnabled="{Binding CanEdit}"
@@ -114,7 +112,7 @@
                                                 Padding="10,4"
                                                 Margin="0,0,8,0"/>
 
-                                        <!-- 【模式二：禁用型】删除按钮 — 始终可见，权限不足时置灰 -->
+                                        <!-- 删除按钮 — 始终可见，权限不足时置灰 -->
                                         <Button Content="删除"
                                                 Command="{Binding DeleteCommand}"
                                                 IsEnabled="{Binding CanDelete}"

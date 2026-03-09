@@ -5,26 +5,21 @@ using RoleSystemDemo.Models;
 namespace RoleSystemDemo.Services;
 
 /// <summary>
-/// 认证服务（单例）。
+/// 认证服务（单例）
 /// 负责登录验证、会话管理，并在状态变更时通过 <see cref="WeakReferenceMessenger"/>
-/// 广播 <see cref="AuthChangedMessage"/>，使所有订阅的 ViewModel 能响应权限变化。
+/// 广播 <see cref="AuthChangedMessage"/>，使所有订阅的 ViewModel 能响应权限变化
 /// </summary>
-/// <remarks>
-/// 教学重点：
-/// <list type="number">
-///   <item>单例模式：通过 <see cref="Instance"/> 全局访问，无需 DI 容器。</item>
-///   <item>Messenger 解耦：状态变更由消息驱动，发送方与接收方互不知晓。</item>
-/// </list>
-/// </remarks>
 public sealed class AuthService
 {
-    // ── 单例 ───────────────────────────────────────────────────────────────
+    #region 单例
 
     public static AuthService Instance { get; } = new();
 
     private AuthService() { }
 
-    // ── 状态 ───────────────────────────────────────────────────────────────
+    #endregion
+
+    #region 状态
 
     /// <summary>当前登录的用户；未登录时为 null。</summary>
     public UserModel? CurrentUser { get; private set; }
@@ -35,10 +30,12 @@ public sealed class AuthService
     /// <summary>是否已登录。</summary>
     public bool IsLoggedIn => CurrentUser is not null;
 
-    // ── 操作 ───────────────────────────────────────────────────────────────
+    #endregion
+
+    #region 操作
 
     /// <summary>
-    /// 尝试用用户名和明文密码登录。
+    /// 尝试用用户名和明文密码登录
     /// </summary>
     /// <returns>登录成功返回 true，否则 false。</returns>
     public bool Login(string username, string password)
@@ -47,9 +44,11 @@ public sealed class AuthService
         var hash = PasswordService.ComputeHash(password);
         var user = users.FirstOrDefault(u =>
             u.Username.Equals(username, StringComparison.OrdinalIgnoreCase)
-            && u.PasswordHash == hash);
+            && u.PasswordHash == hash
+        );
 
-        if (user is null) return false;
+        if (user is null)
+            return false;
 
         CurrentUser = user;
         Broadcast();
@@ -65,7 +64,7 @@ public sealed class AuthService
 
     /// <summary>
     /// 通知 AuthService 当前用户的角色已在外部被修改（例如 Admin 面板改角色），
-    /// 触发一次 <see cref="AuthChangedMessage"/> 广播以刷新全局 UI。
+    /// 触发一次 <see cref="AuthChangedMessage"/> 广播以刷新全局 UI
     /// </summary>
     public void NotifyRoleChanged(UserModel updatedUser)
     {
@@ -76,8 +75,12 @@ public sealed class AuthService
         Broadcast();
     }
 
-    // ── 内部 ───────────────────────────────────────────────────────────────
+    #endregion
+
+    #region 内部
 
     private void Broadcast() =>
         WeakReferenceMessenger.Default.Send(new AuthChangedMessage(CurrentUser));
+
+    #endregion
 }

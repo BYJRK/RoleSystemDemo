@@ -5,7 +5,7 @@ using System.Windows.Data;
 namespace RoleSystemDemo.Converters;
 
 /// <summary>
-/// null 或空字符串 → Collapsed；非 null 非空 → Visible。
+/// null 或空字符串 → Collapsed；非 null 非空 → Visible
 /// </summary>
 [ValueConversion(typeof(object), typeof(Visibility))]
 public sealed class NullToCollapsedConverter : IValueConverter

@@ -6,7 +6,7 @@ using RoleSystemDemo.Services;
 namespace RoleSystemDemo.ViewModels;
 
 /// <summary>
-/// 博客编辑器 ViewModel，支持新建和编辑两种模式。
+/// 博客编辑器 ViewModel，支持新建和编辑两种模式
 /// </summary>
 public partial class BlogEditorViewModel : ObservableObject
 {

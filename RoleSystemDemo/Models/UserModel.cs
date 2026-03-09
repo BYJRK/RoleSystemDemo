@@ -1,7 +1,7 @@
 namespace RoleSystemDemo.Models;
 
 /// <summary>
-/// 用户模型，对应 users.json 中的一条记录。
+/// 用户模型，对应 users.json 中的一条记录
 /// </summary>
 public class UserModel
 {
@@ -14,8 +14,8 @@ public class UserModel
     public UserRole Role { get; set; } = UserRole.Guest;
 
     /// <summary>
-    /// 判断当前用户是否拥有等于或高于 <paramref name="required"/> 的角色权限。
-    /// 权限等级：Admin > User > Guest。
+    /// 判断当前用户是否拥有等于或高于 <paramref name="required"/> 的角色权限
+    /// 权限等级：Admin > User > Guest
     /// </summary>
     public bool HasRole(UserRole required) => Role <= required;
 

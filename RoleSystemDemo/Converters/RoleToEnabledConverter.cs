@@ -6,8 +6,8 @@ namespace RoleSystemDemo.Converters;
 
 /// <summary>
 /// 【权限模式二：禁用型】
-/// 将当前用户角色转换为 <see cref="bool"/>（IsEnabled）。
-/// 权限不足时返回 false（控件可见但置灰），配合 ToolTip 给出说明。
+/// 将当前用户角色转换为 <see cref="bool"/>（IsEnabled）
+/// 权限不足时返回 false（控件可见但置灰），配合 ToolTip 给出说明
 ///
 /// 用法示例（User 或 Admin 才能启用此按钮，Guest 看到置灰按钮）：
 /// <code>

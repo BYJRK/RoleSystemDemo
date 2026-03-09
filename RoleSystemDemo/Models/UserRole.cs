@@ -1,7 +1,7 @@
 namespace RoleSystemDemo.Models;
 
 /// <summary>
-/// 表示用户角色。角色决定了用户在系统中的权限范围。
+/// 表示用户角色。角色决定了用户在系统中的权限范围
 /// </summary>
 public enum UserRole
 {
