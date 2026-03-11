@@ -2,15 +2,19 @@
 
 version: "3"
 
+vars:
+  PROJECT_NAME: RoleSystemDemo
+
 tasks:
   default:
     cmds:
-      - task: run
-    desc: Run the application in Debug mode
+      - task --list
+    desc: Show available tasks
+    silent: true
 
   run:
     cmds:
-      - dotnet run --project ./RoleSystemDemo/RoleSystemDemo.csproj
+      - dotnet run --project ./{{.PROJECT_NAME}}/{{.PROJECT_NAME}}.csproj
     desc: Run the application in Debug mode
     silent: true
 
@@ -34,7 +38,7 @@ tasks:
           Remove-Item -Path './publish' -Recurse -Force
         }"
       - >
-        dotnet publish ./RoleSystemDemo/RoleSystemDemo.csproj
+        dotnet publish ./{{.PROJECT_NAME}}/{{.PROJECT_NAME}}.csproj
         -c Release -o ./publish
         -p:SelfContained=false
         -p:PublishSingleFile=true
